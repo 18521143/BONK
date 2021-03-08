@@ -13,18 +13,25 @@
 import cv2
 import numpy as np
 
+cap = cv2.VideoCapture(0)
 
-cap = cv2.VideoCapture('chaplin.mp4')
+if (cap.isOpened() == False): 
+  print("Unable to read camera feed")
 
-if (cap.isOpened()== False): 
-  print("Error opening video stream or file")
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
 
-while(cap.isOpened()):
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+
+while(True):
   ret, frame = cap.read()
-  if ret == True:
-  else: 
-    break
-    
+
+  if ret == True: 
+  
+  else:
+    break  
+
 cap.release()
+out.release()
 
 cv2.destroyAllWindows()
