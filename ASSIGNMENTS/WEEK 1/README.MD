@@ -8,12 +8,40 @@
 ## Install OpenCV-Python Package
 [OpenCV-Python](https://pypi.org/project/opencv-python/)
 # 2. Write a “Hello world” app
+```python
+print('Hello world')
+```
 ## Read, Write and Display a video/webcam using OpenCV python
-
+### Read and Display a video/webcam using OpenCV python
+```python
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('chaplin.mp4')
+
+if (cap.isOpened()== False): 
+  print("Error opening video stream or file")
+
+while(cap.isOpened()):
+  ret, frame = cap.read()
+  if ret == True:
+    cv2.imshow('Frame',frame)
+    if cv2.waitKey(25) & 0xFF == ord('q'):
+      break
+  else: 
+    break
+
+cap.release()
+
+cv2.destroyAllWindows()
+```
+
+### Write and Display a video/webcam using OpenCV python
+```python
+import cv2
+import numpy as np
+
+cap = cv2.VideoCapture(chaplin.mp4)
 
 if (cap.isOpened() == False): 
   print("Unable to read camera feed")
@@ -27,7 +55,10 @@ while(True):
   ret, frame = cap.read()
 
   if ret == True: 
-  
+    out.write(frame)
+    cv2.imshow('frame',frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+      break
   else:
     break  
 
@@ -35,3 +66,4 @@ cap.release()
 out.release()
 
 cv2.destroyAllWindows()
+```
